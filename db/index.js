@@ -14,12 +14,14 @@ const getAllUsers = async () => {
 
 const createUser = async ({username, password}) => {
     try {
-        const result = await client.query(`
+        const {rows} = await client.query(`
             INSERT INTO users(username, password) 
-            VALUES ($1, $2);
+            VALUES ($1, $2)
+            ON CONFLICT (username) DO NOTHING
+            RETURNING *;
         `, [username, password]);
 
-        return result
+        return rows
     } catch (error) {
         throw error
     }
