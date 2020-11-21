@@ -305,6 +305,18 @@ async function createUser({
       throw error;
     }
   } 
+
+  async function getAllTags() {
+    try {
+      const {rows} = await client.query(`
+        SELECT * FROM tags;
+      `)
+      console.log("Rows inside of the getAllTags$$$$$$", rows)
+      return rows
+    } catch (error) {
+      throw error
+    }
+  }
   
   module.exports = {  
     client,
@@ -318,5 +330,6 @@ async function createUser({
     getPostsByUser,
     createTags,
     addTagsToPost,
-    getPostsByTagName
+    getPostsByTagName,
+    getAllTags
   }
