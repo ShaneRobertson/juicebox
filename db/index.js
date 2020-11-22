@@ -311,19 +311,35 @@ async function createUser({
       const {rows} = await client.query(`
         SELECT * FROM tags;
       `)
-      console.log("Rows inside of the getAllTags$$$$$$", rows)
+
       return rows
     } catch (error) {
       throw error
     }
   }
   
+async function getUserByUsername(username) {
+  try {
+    const { rows: [user]} = await client.query(`
+      SELECT * 
+      FROM users
+      WHERE username=$1;
+    `, [username])
+ 
+      return user;
+  } catch (error) {
+    throw error
+  }
+
+}
+
   module.exports = {  
     client,
     createUser,
     updateUser,
     getAllUsers,
     getUserById,
+    getUserByUsername,
     createPost,
     updatePost,
     getAllPosts,
