@@ -33,17 +33,14 @@ apiRouter.use(async (req, res, next) => {
         }
       });
 
-      apiRouter.use((req, res, next) => {
+apiRouter.use((req, res, next) => {
         if (req.user) {
           console.log("User is set:", req.user);
         }
       
         next();
       });
-
-      
-//curl http://localhost:3000/api -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGJlcnQiLCJpYXQiOjE2MDYwNjE3Mzl9._T6Hg8PKKnu1amXXt7Y0rqJoBjuucdWX3Dkp7QYz6_U'
-
+     
 
 const usersRouter = require('./users')
 apiRouter.use('/users', usersRouter);
